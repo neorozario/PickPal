@@ -176,6 +176,105 @@
             outline: none;
             border-color: #b3a9a0;
         }
+
+        .time-display {
+            font-size: 1.2rem;
+            color: #b3a9a0;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .time-period {
+            color: #EEE5DA;
+            font-weight: 600;
+        }
+
+        .filter-container {
+            display: none;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #2d2d2d;
+            border-radius: 15px;
+            border: 2px solid #EEE5DA;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            background: #2d2d2d;
+            border: 2px solid #EEE5DA;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: #EEE5DA;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-button:hover {
+            background: #EEE5DA;
+            color: #262424;
+        }
+
+        .filter-button.active {
+            background: #EEE5DA;
+            color: #262424;
+        }
+
+        .filter-label {
+            color: #b3a9a0;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .food-options {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .food-options.visible {
+            display: block;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .decision-button {
+            position: relative;
+        }
+
+        .decision-button.active {
+            background: #b3a9a0;
+            color: #EEE5DA;
+        }
     </style>
 </head>
 <body>
@@ -184,74 +283,87 @@
             <div class="logo-icon">P</div>
             <h1>PickPal</h1>
         </div>
+        <div class="time-display">
+            <span id="current-time"></span>
+            <span class="time-period" id="time-period"></span>
+        </div>
         <div class="tagline">Your Decision Making Friend</div>
         <div class="suggestion-card">
             <div id="decision-result"></div>
         </div>
         <div class="loading" id="loading"></div>
         <div class="button-grid">
-            <button class="decision-button" onclick="makeDecision('food')">What Should I Eat?</button>
+            <button class="decision-button" onclick="toggleFoodOptions()">What Should I Eat?</button>
             <button class="decision-button" onclick="makeDecision('yesno')">Yes or No?</button>
             <button class="decision-button" onclick="makeDecision('maybe')">Maybe?</button>
             <button class="decision-button" onclick="makeDecision('coin')">Flip a Coin</button>
             <button class="decision-button" onclick="makeDecision('dice')">Roll a Die</button>
             <button class="decision-button" onclick="makeDecision('custom')">Custom Decision</button>
         </div>
+        <div class="food-options" id="food-options">
+            <div class="filter-container" id="filter-container">
+                <div class="filter-group">
+                    <span class="filter-label">Diet:</span>
+                    <button class="filter-button" onclick="toggleFilter('diet', 'all')" id="diet-all">All</button>
+                    <button class="filter-button" onclick="toggleFilter('diet', 'veg')" id="diet-veg">Vegetarian</button>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">Cuisine:</span>
+                    <button class="filter-button" onclick="toggleFilter('cuisine', 'all')" id="cuisine-all">All</button>
+                    <button class="filter-button" onclick="toggleFilter('cuisine', 'south')" id="cuisine-south">South Indian</button>
+                    <button class="filter-button" onclick="toggleFilter('cuisine', 'north')" id="cuisine-north">North Indian</button>
+                    <button class="filter-button" onclick="toggleFilter('cuisine', 'chinese')" id="cuisine-chinese">Chinese</button>
+                    <button class="filter-button" onclick="toggleFilter('cuisine', 'american')" id="cuisine-american">American</button>
+                </div>
+            </div>
+            <button class="decision-button" onclick="makeDecision('food')" style="margin-top: 1rem;">Get Food Suggestion</button>
+        </div>
         <input type="text" id="custom-options" class="custom-input" placeholder="Enter options separated by commas" style="display: none;">
     </div>
 
     <script>
-        const foods = [
-            // South Indian
-            { name: "Masala Dosa", category: "South Indian" },
-            { name: "Idli Sambar", category: "South Indian" },
-            { name: "Vada", category: "South Indian" },
-            { name: "Upma", category: "South Indian" },
-            { name: "Pongal", category: "South Indian" },
-            { name: "Appam", category: "South Indian" },
-            { name: "Rava Dosa", category: "South Indian" },
-            { name: "Uttapam", category: "South Indian" },
-            
-            // North Indian
-            { name: "Butter Chicken", category: "North Indian" },
-            { name: "Dal Makhani", category: "North Indian" },
-            { name: "Paneer Tikka", category: "North Indian" },
-            { name: "Naan", category: "North Indian" },
-            { name: "Biryani", category: "North Indian" },
-            { name: "Tandoori Roti", category: "North Indian" },
-            { name: "Rajma Chawal", category: "North Indian" },
-            { name: "Chole Bhature", category: "North Indian" },
-            
-            // Chinese
-            { name: "Fried Rice", category: "Chinese" },
-            { name: "Chow Mein", category: "Chinese" },
-            { name: "Spring Rolls", category: "Chinese" },
-            { name: "Kung Pao Chicken", category: "Chinese" },
-            { name: "Mapo Tofu", category: "Chinese" },
-            { name: "Dim Sum", category: "Chinese" },
-            { name: "Hot and Sour Soup", category: "Chinese" },
-            { name: "Wontons", category: "Chinese" },
-            
-            // American
-            { name: "Cheeseburger", category: "American" },
-            { name: "Mac and Cheese", category: "American" },
-            { name: "BBQ Ribs", category: "American" },
-            { name: "Clam Chowder", category: "American" },
-            { name: "Buffalo Wings", category: "American" },
-            { name: "Philly Cheesesteak", category: "American" },
-            { name: "Pot Roast", category: "American" },
-            { name: "Cobb Salad", category: "American" },
-            
-            // Fast Food
-            { name: "Pizza", category: "Fast Food" },
-            { name: "Chicken Nuggets", category: "Fast Food" },
-            { name: "French Fries", category: "Fast Food" },
-            { name: "Tacos", category: "Fast Food" },
-            { name: "Sub Sandwich", category: "Fast Food" },
-            { name: "Chicken Sandwich", category: "Fast Food" },
-            { name: "Onion Rings", category: "Fast Food" },
-            { name: "Ice Cream", category: "Fast Food" }
-        ];
+        const foods = {
+            breakfast: [
+                { name: "Idli Sambar", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Upma", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Pongal", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Appam", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Paratha", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Pancakes", category: "American", diet: "veg", cuisine: "american" },
+                { name: "Waffles", category: "American", diet: "veg", cuisine: "american" },
+                { name: "Dim Sum", category: "Chinese", diet: "non-veg", cuisine: "chinese" }
+            ],
+            lunch: [
+                { name: "Masala Dosa", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Butter Chicken", category: "North Indian", diet: "non-veg", cuisine: "north" },
+                { name: "Dal Makhani", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Paneer Tikka", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Fried Rice", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
+                { name: "Chow Mein", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
+                { name: "Spring Rolls", category: "Chinese", diet: "veg", cuisine: "chinese" },
+                { name: "Mac and Cheese", category: "American", diet: "veg", cuisine: "american" }
+            ],
+            dinner: [
+                { name: "Biryani", category: "North Indian", diet: "non-veg", cuisine: "north" },
+                { name: "Tandoori Roti", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Rajma Chawal", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Chole Bhature", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Kung Pao Chicken", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
+                { name: "Mapo Tofu", category: "Chinese", diet: "veg", cuisine: "chinese" },
+                { name: "BBQ Ribs", category: "American", diet: "non-veg", cuisine: "american" },
+                { name: "Clam Chowder", category: "American", diet: "non-veg", cuisine: "american" }
+            ],
+            snack: [
+                { name: "Vada", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Samosa", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Wontons", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
+                { name: "French Fries", category: "Fast Food", diet: "veg", cuisine: "american" },
+                { name: "Chicken Nuggets", category: "Fast Food", diet: "non-veg", cuisine: "american" },
+                { name: "Onion Rings", category: "Fast Food", diet: "veg", cuisine: "american" },
+                { name: "Ice Cream", category: "Fast Food", diet: "veg", cuisine: "american" },
+                { name: "Pizza", category: "Fast Food", diet: "veg", cuisine: "american" }
+            ]
+        };
 
         const yesNoResponses = [
             { name: "Yes", category: "Definitely!" },
@@ -265,12 +377,75 @@
             { name: "Maybe", category: "50/50" }
         ];
 
+        let activeFilters = {
+            diet: 'all',
+            cuisine: 'all'
+        };
+
+        function toggleFilter(type, value) {
+            // Update active filters
+            activeFilters[type] = value;
+            
+            // Update button styles
+            document.querySelectorAll(`.filter-button[onclick*="${type}"]`).forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(`${type}-${value}`).classList.add('active');
+        }
+
+        function getFilteredFoods(mealType) {
+            let foodOptions = foods[mealType];
+            
+            // Apply filters
+            if (activeFilters.diet !== 'all') {
+                foodOptions = foodOptions.filter(food => food.diet === activeFilters.diet);
+            }
+            if (activeFilters.cuisine !== 'all') {
+                foodOptions = foodOptions.filter(food => food.cuisine === activeFilters.cuisine);
+            }
+            
+            return foodOptions;
+        }
+
+        // Update time display
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            
+            let period;
+            if (hours >= 5 && hours < 12) {
+                period = "Breakfast Time";
+            } else if (hours >= 12 && hours < 16) {
+                period = "Lunch Time";
+            } else if (hours >= 16 && hours < 22) {
+                period = "Dinner Time";
+            } else {
+                period = "Snack Time";
+            }
+
+            document.getElementById('current-time').textContent = timeString;
+            document.getElementById('time-period').textContent = period;
+        }
+
+        // Update time every second
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        function getCurrentMealType() {
+            const hours = new Date().getHours();
+            if (hours >= 5 && hours < 12) return 'breakfast';
+            if (hours >= 12 && hours < 16) return 'lunch';
+            if (hours >= 16 && hours < 22) return 'dinner';
+            return 'snack';
+        }
+
         function makeDecision(type) {
             const resultElement = document.getElementById("decision-result");
             const loadingElement = document.getElementById("loading");
             const customInput = document.getElementById("custom-options");
             
-            // Show loading animation
             resultElement.classList.remove("visible");
             loadingElement.style.display = "block";
             
@@ -280,12 +455,20 @@
                 return;
             }
             
-            // Simulate loading time
             setTimeout(() => {
                 let result;
                 switch(type) {
                     case 'food':
-                        result = foods[Math.floor(Math.random() * foods.length)];
+                        const mealType = getCurrentMealType();
+                        const foodOptions = getFilteredFoods(mealType);
+                        if (foodOptions.length === 0) {
+                            result = {
+                                name: "No options available",
+                                category: "Try different filters"
+                            };
+                        } else {
+                            result = foodOptions[Math.floor(Math.random() * foodOptions.length)];
+                        }
                         break;
                     case 'yesno':
                         result = yesNoResponses[Math.floor(Math.random() * yesNoResponses.length)];
@@ -312,7 +495,6 @@
                     <div class="decision-category">${result.category}</div>
                 `;
                 
-                // Hide loading and show result
                 loadingElement.style.display = "none";
                 resultElement.classList.add("visible");
             }, 800);
@@ -334,6 +516,38 @@
                 }
             }
         });
+
+        function toggleFoodOptions() {
+            const foodOptions = document.getElementById('food-options');
+            const filterContainer = document.getElementById('filter-container');
+            const foodButton = document.querySelector('.decision-button');
+            
+            // Toggle food options visibility
+            foodOptions.classList.toggle('visible');
+            filterContainer.style.display = foodOptions.classList.contains('visible') ? 'flex' : 'none';
+            foodButton.classList.toggle('active');
+            
+            // Reset filters when hiding
+            if (!foodOptions.classList.contains('visible')) {
+                resetFilters();
+            }
+        }
+
+        function resetFilters() {
+            activeFilters = {
+                diet: 'all',
+                cuisine: 'all'
+            };
+            
+            // Reset all filter buttons
+            document.querySelectorAll('.filter-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Set 'All' buttons as active
+            document.getElementById('diet-all').classList.add('active');
+            document.getElementById('cuisine-all').classList.add('active');
+        }
     </script>
 </body>
 </html>
