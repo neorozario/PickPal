@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
         }
 
         body {
@@ -24,6 +25,7 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         .container {
@@ -34,6 +36,7 @@
             max-width: 600px;
             width: 90%;
             text-align: center;
+            margin: 60px auto 20px; /* Add top margin for theme switch */
         }
 
         .logo {
@@ -640,6 +643,205 @@
         body.light-mode .custom-decision-button:hover {
             background: #666666;
             color: #EEE5DA;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin-top: 80px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 0.9rem;
+            }
+
+            .button-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .decision-button {
+                padding: 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .suggestion-card {
+                padding: 1.5rem;
+                min-height: 80px;
+            }
+
+            #decision-result {
+                font-size: 1.5rem;
+            }
+
+            .filter-container {
+                padding: 0.8rem;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+            }
+
+            .filter-button {
+                width: 100%;
+                padding: 0.8rem;
+            }
+
+            .filter-label {
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+
+            .custom-decision-container {
+                padding: 1rem;
+            }
+
+            .decision-item {
+                padding: 0.6rem;
+            }
+
+            .decision-input {
+                font-size: 0.95rem;
+            }
+
+            .add-decision, .custom-decision-button {
+                padding: 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .restaurant-card {
+                padding: 0.8rem;
+            }
+
+            .restaurant-name {
+                font-size: 1.1rem;
+            }
+
+            .restaurant-details {
+                font-size: 0.85rem;
+            }
+
+            .restaurant-rating {
+                font-size: 0.9rem;
+            }
+
+            .restaurant-price {
+                font-size: 0.85rem;
+            }
+
+            /* Adjust theme switch position for mobile */
+            .theme-switch-wrapper {
+                top: 10px;
+                right: 10px;
+            }
+
+            .theme-switch {
+                height: 30px;
+                width: 50px;
+            }
+
+            .slider:before {
+                height: 22px;
+                width: 22px;
+            }
+
+            input:checked + .slider:before {
+                transform: translateX(20px);
+            }
+
+            /* Improve touch targets */
+            .remove-decision {
+                padding: 0.8rem;
+                font-size: 1.4rem;
+            }
+
+            /* Add bottom padding for better scrolling */
+            .container {
+                padding-bottom: 2rem;
+            }
+
+            /* Optimize time display for mobile */
+            .time-display {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .time-period {
+                display: block;
+                margin-top: 0.3rem;
+            }
+
+            /* Improve button touch targets */
+            .decision-button, .filter-button, .location-button {
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+
+            /* Add pull-to-refresh visual feedback */
+            .container {
+                overscroll-behavior-y: contain;
+            }
+
+            /* Optimize loading spinner for mobile */
+            .loading {
+                width: 30px;
+                height: 30px;
+                border-width: 3px;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 380px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .decision-button {
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            #decision-result {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Landscape mode optimization */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .container {
+                margin: 40px auto;
+                padding: 1rem;
+            }
+
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .suggestion-card {
+                min-height: 60px;
+                margin: 1rem 0;
+            }
+
+            #decision-result {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
