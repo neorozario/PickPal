@@ -275,9 +275,381 @@
             background: #b3a9a0;
             color: #EEE5DA;
         }
+
+        .location-button {
+            background: #2d2d2d;
+            border: 2px solid #EEE5DA;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: #EEE5DA;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .location-button:hover {
+            background: #EEE5DA;
+            color: #262424;
+        }
+
+        .location-button i {
+            font-size: 1rem;
+        }
+
+        .restaurant-card {
+            background: #2d2d2d;
+            border: 2px solid #EEE5DA;
+            border-radius: 15px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .restaurant-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #EEE5DA;
+            margin-bottom: 0.5rem;
+        }
+
+        .restaurant-details {
+            font-size: 0.9rem;
+            color: #b3a9a0;
+            margin-bottom: 0.5rem;
+        }
+
+        .restaurant-rating {
+            color: #EEE5DA;
+            font-weight: 500;
+        }
+
+        .restaurant-price {
+            color: #b3a9a0;
+            font-size: 0.9rem;
+        }
+
+        .location-error {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Theme Toggle Styles */
+        .theme-switch-wrapper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            height: 34px;
+            position: relative;
+            width: 60px;
+        }
+
+        .theme-switch input {
+            display: none;
+        }
+
+        .slider {
+            background-color: #2d2d2d;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 34px;
+            border: 2px solid #EEE5DA;
+        }
+
+        .slider:before {
+            background-color: #EEE5DA;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 26px;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #EEE5DA;
+            border-color: #262424;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+            background-color: #262424;
+        }
+
+        /* Light Mode Styles */
+        body.light-mode {
+            background: #EEE5DA;
+            color: #262424;
+        }
+
+        body.light-mode .container {
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .logo-icon {
+            background: #262424;
+            color: #EEE5DA;
+        }
+
+        body.light-mode h1 {
+            color: #262424;
+        }
+
+        body.light-mode .tagline {
+            color: #666666;
+        }
+
+        body.light-mode .suggestion-card {
+            background: #ffffff;
+            border-color: #262424;
+        }
+
+        body.light-mode .suggestion-card:hover {
+            border-color: #666666;
+        }
+
+        body.light-mode .decision-button {
+            background: #262424;
+            color: #EEE5DA;
+        }
+
+        body.light-mode .decision-button:hover {
+            background: #666666;
+            color: #EEE5DA;
+        }
+
+        body.light-mode .custom-input {
+            background: #ffffff;
+            border-color: #262424;
+            color: #262424;
+        }
+
+        body.light-mode .custom-input::placeholder {
+            color: #666666;
+        }
+
+        body.light-mode .filter-container {
+            background: #ffffff;
+            border-color: #262424;
+        }
+
+        body.light-mode .filter-button {
+            background: #ffffff;
+            border-color: #262424;
+            color: #262424;
+        }
+
+        body.light-mode .filter-button:hover,
+        body.light-mode .filter-button.active {
+            background: #262424;
+            color: #EEE5DA;
+        }
+
+        body.light-mode .filter-label {
+            color: #666666;
+        }
+
+        body.light-mode .restaurant-card {
+            background: #ffffff;
+            border-color: #262424;
+        }
+
+        body.light-mode .restaurant-name {
+            color: #262424;
+        }
+
+        body.light-mode .restaurant-details {
+            color: #666666;
+        }
+
+        body.light-mode .restaurant-rating {
+            color: #262424;
+        }
+
+        body.light-mode .restaurant-price {
+            color: #666666;
+        }
+
+        body.light-mode .time-display {
+            color: #666666;
+        }
+
+        body.light-mode .time-period {
+            color: #262424;
+        }
+
+        /* Custom Decision UI Styles */
+        .custom-decision-container {
+            display: none;
+            margin-top: 1rem;
+            padding: 1.5rem;
+            background: #2d2d2d;
+            border-radius: 15px;
+            border: 2px solid #EEE5DA;
+            animation: slideDown 0.3s ease;
+        }
+
+        .custom-decision-container.visible {
+            display: block;
+        }
+
+        .custom-decision-header {
+            font-size: 1.2rem;
+            color: #EEE5DA;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .decision-list {
+            margin-bottom: 1.5rem;
+        }
+
+        .decision-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            background: #262424;
+            border-radius: 10px;
+            border: 1px solid #EEE5DA;
+        }
+
+        .decision-number {
+            color: #b3a9a0;
+            font-weight: 500;
+            min-width: 30px;
+        }
+
+        .decision-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #EEE5DA;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            padding: 0.5rem;
+        }
+
+        .decision-input:focus {
+            outline: none;
+        }
+
+        .remove-decision {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-decision {
+            background: #EEE5DA;
+            color: #262424;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .add-decision:hover {
+            background: #b3a9a0;
+            color: #EEE5DA;
+        }
+
+        .custom-decision-button {
+            background: #EEE5DA;
+            color: #262424;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .custom-decision-button:hover {
+            background: #b3a9a0;
+            color: #EEE5DA;
+        }
+
+        body.light-mode .custom-decision-container {
+            background: #ffffff;
+            border-color: #262424;
+        }
+
+        body.light-mode .decision-item {
+            background: #f5f5f5;
+            border-color: #262424;
+        }
+
+        body.light-mode .decision-input {
+            color: #262424;
+        }
+
+        body.light-mode .add-decision {
+            background: #262424;
+            color: #EEE5DA;
+        }
+
+        body.light-mode .add-decision:hover {
+            background: #666666;
+            color: #EEE5DA;
+        }
+
+        body.light-mode .custom-decision-button {
+            background: #262424;
+            color: #EEE5DA;
+        }
+
+        body.light-mode .custom-decision-button:hover {
+            background: #666666;
+            color: #EEE5DA;
+        }
     </style>
 </head>
 <body>
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider"></div>
+        </label>
+    </div>
     <div class="container">
         <div class="logo">
             <div class="logo-icon">P</div>
@@ -315,53 +687,135 @@
                     <button class="filter-button" onclick="toggleFilter('cuisine', 'chinese')" id="cuisine-chinese">Chinese</button>
                     <button class="filter-button" onclick="toggleFilter('cuisine', 'american')" id="cuisine-american">American</button>
                 </div>
+                <div class="filter-group">
+                    <button class="location-button" onclick="findNearbyRestaurants()">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Find Nearby Restaurants
+                    </button>
+                </div>
             </div>
+            <div id="restaurant-results"></div>
             <button class="decision-button" onclick="makeDecision('food')" style="margin-top: 1rem;">Get Food Suggestion</button>
         </div>
-        <input type="text" id="custom-options" class="custom-input" placeholder="Enter options separated by commas" style="display: none;">
+        <div class="custom-decision-container" id="custom-decision-container">
+            <div class="custom-decision-header">Enter your options:</div>
+            <div class="decision-list" id="decision-list">
+                <div class="decision-item">
+                    <span class="decision-number">1</span>
+                    <input type="text" class="decision-input" placeholder="Enter first option">
+                </div>
+                <div class="decision-item">
+                    <span class="decision-number">2</span>
+                    <input type="text" class="decision-input" placeholder="Enter second option">
+                </div>
+            </div>
+            <button class="add-decision" onclick="addDecisionInput()">+ Add Another Option</button>
+            <button class="custom-decision-button" onclick="handleCustomDecision()">Make Decision!</button>
+        </div>
     </div>
 
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
     <script>
         const foods = {
             breakfast: [
+                // South Indian Breakfast
                 { name: "Idli Sambar", category: "South Indian", diet: "veg", cuisine: "south" },
-                { name: "Upma", category: "South Indian", diet: "veg", cuisine: "south" },
-                { name: "Pongal", category: "South Indian", diet: "veg", cuisine: "south" },
-                { name: "Appam", category: "South Indian", diet: "veg", cuisine: "south" },
-                { name: "Paratha", category: "North Indian", diet: "veg", cuisine: "north" },
-                { name: "Pancakes", category: "American", diet: "veg", cuisine: "american" },
-                { name: "Waffles", category: "American", diet: "veg", cuisine: "american" },
-                { name: "Dim Sum", category: "Chinese", diet: "non-veg", cuisine: "chinese" }
+                { name: "Mini Idlis with Sambar", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Ghee Podi Idli", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Thatte Idosi", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Dosa", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Onion Dosa", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Cheese Dosa", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Masala Dosa", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Rava Dosa", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Egg Dosa", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                // North Indian Breakfast
+                { name: "Aloo Paratha", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Paneer Paratha", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Chole Bhature", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Kachori with Aloo Sabzi", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Samosa", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Pani Puri", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Egg Bhurji with Pav", category: "North Indian", diet: "non-veg", cuisine: "north" },
+                { name: "Keema Paratha", category: "North Indian", diet: "non-veg", cuisine: "north" }
             ],
             lunch: [
-                { name: "Masala Dosa", category: "South Indian", diet: "veg", cuisine: "south" },
-                { name: "Butter Chicken", category: "North Indian", diet: "non-veg", cuisine: "north" },
-                { name: "Dal Makhani", category: "North Indian", diet: "veg", cuisine: "north" },
-                { name: "Paneer Tikka", category: "North Indian", diet: "veg", cuisine: "north" },
-                { name: "Fried Rice", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
-                { name: "Chow Mein", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
-                { name: "Spring Rolls", category: "Chinese", diet: "veg", cuisine: "chinese" },
-                { name: "Mac and Cheese", category: "American", diet: "veg", cuisine: "american" }
+                // South Indian Lunch
+                { name: "Lemon Rice", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Tomato Rice", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Curd Rice", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Sambar Rice", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Idiyappam with Coconut Milk", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Parotta with Salna", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Chicken Biryani", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Mutton Biryani", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                // North Indian Lunch
+                { name: "Dal Tadka with Rice", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Paneer Butter Masala", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Roti with Dal Fry", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Pulao", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Mix Veg Kurma", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Butter Chicken with Naan", category: "North Indian", diet: "non-veg", cuisine: "north" },
+                { name: "Tandoori Chicken", category: "North Indian", diet: "non-veg", cuisine: "north" },
+                { name: "Mutton Rogan Josh", category: "North Indian", diet: "non-veg", cuisine: "north" }
             ],
             dinner: [
-                { name: "Biryani", category: "North Indian", diet: "non-veg", cuisine: "north" },
-                { name: "Tandoori Roti", category: "North Indian", diet: "veg", cuisine: "north" },
-                { name: "Rajma Chawal", category: "North Indian", diet: "veg", cuisine: "north" },
-                { name: "Chole Bhature", category: "North Indian", diet: "veg", cuisine: "north" },
-                { name: "Kung Pao Chicken", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
-                { name: "Mapo Tofu", category: "Chinese", diet: "veg", cuisine: "chinese" },
-                { name: "BBQ Ribs", category: "American", diet: "non-veg", cuisine: "american" },
-                { name: "Clam Chowder", category: "American", diet: "non-veg", cuisine: "american" }
+                // South Indian Dinner
+                { name: "Kothu Parotta", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Chilli Parotta", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Kerala Porotta with Chicken Curry", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Chicken Kothu Parotta", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Mutton Kothu Parotta", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Chicken 65", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Beef Fry", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Fish Fry", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                // North Indian Dinner
+                { name: "Paneer Butter Masala", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Dal Makhani", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Veg Biryani", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Mixed Vegetable Curry", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Kadai Paneer", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Chicken Tikka", category: "North Indian", diet: "non-veg", cuisine: "north" },
+                { name: "Mutton Seekh Kebab", category: "North Indian", diet: "non-veg", cuisine: "north" },
+                { name: "Butter Chicken with Naan", category: "North Indian", diet: "non-veg", cuisine: "north" },
+                // Chinese Dinner
+                { name: "Veg Manchurian", category: "Chinese", diet: "veg", cuisine: "chinese" },
+                { name: "Veg Fried Rice", category: "Chinese", diet: "veg", cuisine: "chinese" },
+                { name: "Veg Noodles", category: "Chinese", diet: "veg", cuisine: "chinese" },
+                { name: "Veg Spring Rolls", category: "Chinese", diet: "veg", cuisine: "chinese" },
+                { name: "Veg Manchurian Noodles", category: "Chinese", diet: "veg", cuisine: "chinese" },
+                { name: "Chilli Chicken", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
+                { name: "Chicken Manchurian", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
+                { name: "Chicken Fried Rice", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
+                // American Dinner
+                { name: "Margherita Pizza", category: "American", diet: "veg", cuisine: "american" },
+                { name: "Veg Burger", category: "American", diet: "veg", cuisine: "american" },
+                { name: "Mac and Cheese", category: "American", diet: "veg", cuisine: "american" },
+                { name: "Veg Quesadilla", category: "American", diet: "veg", cuisine: "american" },
+                { name: "Veg Wrap", category: "American", diet: "veg", cuisine: "american" },
+                { name: "Pepperoni Pizza", category: "American", diet: "non-veg", cuisine: "american" },
+                { name: "Chicken Burger", category: "American", diet: "non-veg", cuisine: "american" },
+                { name: "BBQ Chicken Wings", category: "American", diet: "non-veg", cuisine: "american" }
             ],
             snack: [
-                { name: "Vada", category: "South Indian", diet: "veg", cuisine: "south" },
-                { name: "Samosa", category: "North Indian", diet: "veg", cuisine: "north" },
-                { name: "Wontons", category: "Chinese", diet: "non-veg", cuisine: "chinese" },
-                { name: "French Fries", category: "Fast Food", diet: "veg", cuisine: "american" },
-                { name: "Chicken Nuggets", category: "Fast Food", diet: "non-veg", cuisine: "american" },
-                { name: "Onion Rings", category: "Fast Food", diet: "veg", cuisine: "american" },
-                { name: "Ice Cream", category: "Fast Food", diet: "veg", cuisine: "american" },
-                { name: "Pizza", category: "Fast Food", diet: "veg", cuisine: "american" }
+                // South Indian Snacks
+                { name: "Medu Vada", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Veg Puffs", category: "South Indian", diet: "veg", cuisine: "south" },
+                { name: "Bread Omelette", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Chicken Roll", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Pepper Chicken Dry", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Egg Rice", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Chicken Fried Rice", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                { name: "Shawarma", category: "South Indian", diet: "non-veg", cuisine: "south" },
+                // North Indian Snacks
+                { name: "Veg Momos", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Pav Bhaji", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Street Chaat", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Paneer Rolls", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Chilli Cheese Toast", category: "North Indian", diet: "veg", cuisine: "north" },
+                { name: "Chicken Shawarma", category: "North Indian", diet: "non-veg", cuisine: "north" },
+                { name: "Chicken Roll", category: "North Indian", diet: "non-veg", cuisine: "north" },
+                { name: "Egg Keema Pav", category: "North Indian", diet: "non-veg", cuisine: "north" }
             ]
         };
 
@@ -444,13 +898,25 @@
         function makeDecision(type) {
             const resultElement = document.getElementById("decision-result");
             const loadingElement = document.getElementById("loading");
-            const customInput = document.getElementById("custom-options");
+            const foodOptions = document.getElementById("food-options");
+            const customDecisionContainer = document.getElementById("custom-decision-container");
+            
+            // Close other menus first
+            if (type !== 'food') {
+                foodOptions.classList.remove("visible");
+                document.getElementById("filter-container").style.display = "none";
+                resetFilters();
+            }
+            
+            if (type !== 'custom') {
+                customDecisionContainer.classList.remove("visible");
+            }
             
             resultElement.classList.remove("visible");
             loadingElement.style.display = "block";
             
             if (type === 'custom') {
-                customInput.style.display = "block";
+                customDecisionContainer.classList.add("visible");
                 loadingElement.style.display = "none";
                 return;
             }
@@ -500,22 +966,52 @@
             }, 800);
         }
 
-        // Handle custom decision input
-        document.getElementById("custom-options").addEventListener("keypress", function(e) {
-            if (e.key === "Enter") {
-                const options = this.value.split(",").map(opt => opt.trim()).filter(opt => opt);
-                if (options.length > 0) {
-                    const randomOption = options[Math.floor(Math.random() * options.length)];
-                    document.getElementById("decision-result").innerHTML = `
-                        ${randomOption}
-                        <div class="decision-category">Custom Decision</div>
-                    `;
-                    document.getElementById("decision-result").classList.add("visible");
-                    this.style.display = "none";
-                    this.value = "";
-                }
+        function addDecisionInput() {
+            const decisionList = document.getElementById("decision-list");
+            const newNumber = decisionList.children.length + 1;
+            
+            const newDecision = document.createElement("div");
+            newDecision.className = "decision-item";
+            newDecision.innerHTML = `
+                <span class="decision-number">${newNumber}</span>
+                <input type="text" class="decision-input" placeholder="Enter option ${newNumber}">
+                <button class="remove-decision" onclick="removeDecision(this)">×</button>
+            `;
+            
+            decisionList.appendChild(newDecision);
+        }
+
+        function removeDecision(button) {
+            const decisionItem = button.parentElement;
+            const decisionList = decisionItem.parentElement;
+            decisionList.removeChild(decisionItem);
+            
+            // Update numbers
+            const decisions = decisionList.getElementsByClassName("decision-item");
+            for (let i = 0; i < decisions.length; i++) {
+                decisions[i].querySelector(".decision-number").textContent = i + 1;
             }
-        });
+        }
+
+        function handleCustomDecision() {
+            const decisionInputs = document.getElementsByClassName("decision-input");
+            const options = Array.from(decisionInputs)
+                .map(input => input.value.trim())
+                .filter(value => value !== "");
+            
+            if (options.length > 0) {
+                const randomOption = options[Math.floor(Math.random() * options.length)];
+                document.getElementById("decision-result").innerHTML = `
+                    ${randomOption}
+                    <div class="decision-category">Custom Decision</div>
+                `;
+                document.getElementById("decision-result").classList.add("visible");
+                document.getElementById("custom-decision-container").classList.remove("visible");
+                
+                // Reset inputs
+                Array.from(decisionInputs).forEach(input => input.value = "");
+            }
+        }
 
         function toggleFoodOptions() {
             const foodOptions = document.getElementById('food-options');
@@ -548,6 +1044,200 @@
             document.getElementById('diet-all').classList.add('active');
             document.getElementById('cuisine-all').classList.add('active');
         }
+
+        // Add these variables at the top of your script
+        let userLocation = null;
+        const ZOMATO_API_KEY = 'YOUR_ZOMATO_API_KEY'; // You'll need to get this from Zomato API
+
+        // Add these new functions
+        function findNearbyRestaurants() {
+            const resultElement = document.getElementById("restaurant-results");
+            resultElement.innerHTML = '<div class="loading" id="loading"></div>';
+            
+            // Check if Zomato API key is set
+            if (ZOMATO_API_KEY === 'YOUR_ZOMATO_API_KEY') {
+                resultElement.innerHTML = `
+                    <div class="location-error">
+                        API key not configured. Please contact the administrator.
+                    </div>
+                `;
+                return;
+            }
+
+            if (!userLocation) {
+                getLocation()
+                    .then(location => {
+                        userLocation = location;
+                        fetchNearbyRestaurants(location);
+                    })
+                    .catch(error => {
+                        resultElement.innerHTML = `
+                            <div class="location-error">
+                                Unable to get location. Please enable location access or try again.
+                                <br>
+                                <small>Error: ${error.message}</small>
+                            </div>
+                        `;
+                    });
+            } else {
+                fetchNearbyRestaurants(userLocation);
+            }
+        }
+
+        function getLocation() {
+            return new Promise((resolve, reject) => {
+                if (!navigator.geolocation) {
+                    reject(new Error('Geolocation is not supported by your browser'));
+                    return;
+                }
+
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        resolve({
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        });
+                    },
+                    error => {
+                        reject(error);
+                    }
+                );
+            });
+        }
+
+        async function fetchNearbyRestaurants(location) {
+            const resultElement = document.getElementById("restaurant-results");
+            const mealType = getCurrentMealType();
+            const cuisine = getCuisineFromFilters();
+            
+            try {
+                // First, get the city ID
+                const cityResponse = await fetch(`https://developers.zomato.com/api/v2.1/cities?lat=${location.latitude}&lon=${location.longitude}`, {
+                    headers: {
+                        'user-key': ZOMATO_API_KEY,
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (!cityResponse.ok) {
+                    throw new Error(`City API error: ${cityResponse.status}`);
+                }
+
+                const cityData = await cityResponse.json();
+                if (!cityData.location_suggestions || cityData.location_suggestions.length === 0) {
+                    throw new Error('No city found for this location');
+                }
+
+                const cityId = cityData.location_suggestions[0].id;
+
+                // Then search for restaurants
+                const searchParams = new URLSearchParams({
+                    entity_id: cityId,
+                    entity_type: 'city',
+                    count: '5',
+                    sort: 'rating',
+                    order: 'desc'
+                });
+
+                if (cuisine) {
+                    searchParams.append('cuisines', cuisine);
+                }
+
+                const response = await fetch(`https://developers.zomato.com/api/v2.1/search?${searchParams}`, {
+                    headers: {
+                        'user-key': ZOMATO_API_KEY,
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Restaurant API error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.restaurants && data.restaurants.length > 0) {
+                    const restaurants = data.restaurants.map(restaurant => restaurant.restaurant);
+                    displayRestaurants(restaurants);
+                } else {
+                    resultElement.innerHTML = `
+                        <div class="location-error">
+                            No restaurants found nearby. Try different filters or location.
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error fetching restaurants:', error);
+                resultElement.innerHTML = `
+                    <div class="location-error">
+                        Error fetching restaurants. Please try again later.
+                        <br>
+                        <small>Error: ${error.message}</small>
+                    </div>
+                `;
+            }
+        }
+
+        function displayRestaurants(restaurants) {
+            const resultElement = document.getElementById("restaurant-results");
+            resultElement.innerHTML = restaurants.map(restaurant => `
+                <div class="restaurant-card">
+                    <div class="restaurant-name">${restaurant.name}</div>
+                    <div class="restaurant-details">
+                        ${restaurant.location.address}
+                        ${restaurant.location.locality ? `<br>${restaurant.location.locality}` : ''}
+                    </div>
+                    <div class="restaurant-rating">
+                        Rating: ${restaurant.user_rating.aggregate_rating}/5
+                        (${restaurant.user_rating.votes} votes)
+                    </div>
+                    <div class="restaurant-price">
+                        Price for two: ₹${restaurant.average_cost_for_two}
+                        ${restaurant.price_range ? `<br>Price Range: ${restaurant.price_range}/4` : ''}
+                    </div>
+                    <div class="restaurant-features">
+                        ${restaurant.has_online_delivery ? '🛵 Online Delivery' : ''}
+                        ${restaurant.has_table_booking ? '🍽️ Table Booking' : ''}
+                    </div>
+                    <a href="${restaurant.url}" target="_blank" class="decision-button" style="margin-top: 0.5rem; display: inline-block; text-decoration: none;">
+                        View Menu
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        function getCuisineFromFilters() {
+            // Map our cuisine filters to Zomato cuisine IDs
+            const cuisineMap = {
+                'south': '308', // South Indian
+                'north': '148', // North Indian
+                'chinese': '25', // Chinese
+                'american': '1'  // American
+            };
+            
+            return activeFilters.cuisine === 'all' ? '' : cuisineMap[activeFilters.cuisine] || '';
+        }
+
+        // Add this at the beginning of your script section
+        const themeSwitch = document.getElementById('checkbox');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            themeSwitch.checked = true;
+        }
+
+        // Theme switch event listener
+        themeSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
     </script>
 </body>
 </html>
