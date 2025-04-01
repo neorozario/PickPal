@@ -29,7 +29,7 @@
         }
 
         .container {
-            background: #2d2d2d;
+            background: #262424;
             padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -74,7 +74,7 @@
         }
 
         .suggestion-card {
-            background: #2d2d2d;
+            background: #262424;
             padding: 2rem;
             border-radius: 15px;
             margin: 1.5rem 0;
@@ -82,13 +82,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid #EEE5DA;
+            transform-origin: center;
         }
 
         .suggestion-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
             border-color: #b3a9a0;
+        }
+
+        .suggestion-card:active {
+            transform: translateY(-2px) scale(0.98);
         }
 
         #decision-result {
@@ -96,7 +101,7 @@
             font-weight: 600;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.5s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             color: #EEE5DA;
         }
 
@@ -122,26 +127,48 @@
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            transform-origin: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .decision-button:hover {
             transform: translateY(-2px);
-            background: #b3a9a0;
-            color: #EEE5DA;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
 
         .decision-button:active {
-            transform: translateY(0);
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .decision-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%) scale(0);
+            border-radius: 50%;
+            transition: transform 0.3s ease-out;
+            opacity: 0;
+        }
+
+        .decision-button:active::after {
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 1;
+            transition: 0s;
         }
 
         .loading {
             display: none;
             width: 40px;
             height: 40px;
-            border: 4px solid #2d2d2d;
+            border: 4px solid #262424;
             border-top: 4px solid #EEE5DA;
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -160,7 +187,7 @@
         }
 
         .custom-input {
-            background: #2d2d2d;
+            background: #262424;
             border: 2px solid #EEE5DA;
             padding: 0.8rem;
             border-radius: 10px;
@@ -177,12 +204,12 @@
 
         .custom-input:focus {
             outline: none;
-            border-color: #b3a9a0;
+            border-color: #EEE5DA;
         }
 
         .time-display {
             font-size: 1.2rem;
-            color: #b3a9a0;
+            color: #EEE5DA;
             margin-bottom: 1rem;
             font-weight: 500;
         }
@@ -199,7 +226,7 @@
             justify-content: center;
             margin: 1rem 0;
             padding: 1rem;
-            background: #2d2d2d;
+            background: #262424;
             border-radius: 15px;
             border: 2px solid #EEE5DA;
             animation: slideDown 0.3s ease;
@@ -224,7 +251,7 @@
         }
 
         .filter-button {
-            background: #2d2d2d;
+            background: #262424;
             border: 2px solid #EEE5DA;
             padding: 0.5rem 1rem;
             font-size: 0.9rem;
@@ -248,7 +275,7 @@
         }
 
         .filter-label {
-            color: #b3a9a0;
+            color: #EEE5DA;
             font-size: 0.9rem;
             margin-right: 0.5rem;
             white-space: nowrap;
@@ -275,12 +302,12 @@
         }
 
         .decision-button.active {
-            background: #b3a9a0;
-            color: #EEE5DA;
+            background: #EEE5DA;
+            color: #262424;
         }
 
         .location-button {
-            background: #2d2d2d;
+            background: #262424;
             border: 2px solid #EEE5DA;
             padding: 0.5rem 1rem;
             font-size: 0.9rem;
@@ -306,7 +333,7 @@
         }
 
         .restaurant-card {
-            background: #2d2d2d;
+            background: #262424;
             border: 2px solid #EEE5DA;
             border-radius: 15px;
             padding: 1.2rem;
@@ -339,13 +366,13 @@
         }
 
         .restaurant-price {
-            color: #b3a9a0;
+            color: #EEE5DA;
             font-size: 0.9rem;
             margin: 0.5rem 0;
         }
 
         .restaurant-address {
-            color: #b3a9a0;
+            color: #EEE5DA;
             font-size: 0.9rem;
             margin: 0.5rem 0;
             display: flex;
@@ -354,7 +381,7 @@
         }
 
         .restaurant-phone {
-            color: #b3a9a0;
+            color: #EEE5DA;
             font-size: 0.9rem;
             margin: 0.5rem 0;
             display: flex;
@@ -363,7 +390,7 @@
         }
 
         .restaurant-hours {
-            color: #b3a9a0;
+            color: #EEE5DA;
             font-size: 0.9rem;
             margin: 0.5rem 0;
             display: flex;
@@ -397,8 +424,8 @@
         }
 
         .action-button:hover {
-            background: #b3a9a0;
-            color: #EEE5DA;
+            background: #EEE5DA;
+            color: #262424;
         }
 
         .location-error {
@@ -430,7 +457,7 @@
         }
 
         .slider {
-            background-color: #2d2d2d;
+            background-color: #262424;
             bottom: 0;
             cursor: pointer;
             left: 0;
@@ -568,7 +595,7 @@
             display: none;
             margin-top: 1rem;
             padding: 1.5rem;
-            background: #2d2d2d;
+            background: #262424;
             border-radius: 15px;
             border: 2px solid #EEE5DA;
             animation: slideDown 0.3s ease;
@@ -602,7 +629,7 @@
         }
 
         .decision-number {
-            color: #b3a9a0;
+            color: #EEE5DA;
             font-weight: 500;
             min-width: 30px;
         }
@@ -648,8 +675,8 @@
         }
 
         .add-decision:hover {
-            background: #b3a9a0;
-            color: #EEE5DA;
+            background: #EEE5DA;
+            color: #262424;
         }
 
         .custom-decision-button {
@@ -667,8 +694,8 @@
         }
 
         .custom-decision-button:hover {
-            background: #b3a9a0;
-            color: #EEE5DA;
+            background: #EEE5DA;
+            color: #262424;
         }
 
         body.light-mode .custom-decision-container {
@@ -903,6 +930,110 @@
                 font-size: 1.3rem;
             }
         }
+
+        /* Add Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.visible {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #262424;
+            border: 2px solid #EEE5DA;
+            border-radius: 20px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: auto;
+            position: relative;
+            transform: translateY(-20px);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal.visible .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #EEE5DA;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #EEE5DA;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #EEE5DA;
+        }
+
+        body.light-mode .modal-content {
+            background: #ffffff;
+            border-color: #262424;
+        }
+
+        body.light-mode .modal-title {
+            color: #262424;
+        }
+
+        body.light-mode .close-modal {
+            color: #666666;
+        }
+
+        body.light-mode .close-modal:hover {
+            color: #262424;
+        }
+
+        /* Mobile Responsive Modal Styles */
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+                margin: 1rem;
+            }
+
+            .modal-header {
+                margin-bottom: 1rem;
+            }
+
+            .modal-title {
+                font-size: 1.3rem;
+            }
+
+            .close-modal {
+                font-size: 1.3rem;
+                padding: 0.4rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -927,14 +1058,22 @@
         </div>
         <div class="loading" id="loading"></div>
         <div class="button-grid">
-            <button class="decision-button" onclick="toggleFoodOptions()">What Should I Eat?</button>
+            <button class="decision-button" onclick="openModal('filter-modal')">What Should I Eat?</button>
             <button class="decision-button" onclick="makeDecision('yesno')">Yes or No?</button>
             <button class="decision-button" onclick="makeDecision('coin')">Flip a Coin</button>
             <button class="decision-button" onclick="makeDecision('dice')">Roll a Die</button>
-            <button class="decision-button" onclick="makeDecision('custom')">Custom Decision</button>
+            <button class="decision-button" onclick="openModal('custom-decision-modal')">Custom Decision</button>
         </div>
-        <div class="food-options" id="food-options">
-            <div class="filter-container" id="filter-container">
+    </div>
+
+    <!-- Modal Containers -->
+    <div class="modal" id="filter-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Food Filters</h2>
+                <button class="close-modal" onclick="closeModal('filter-modal')">×</button>
+            </div>
+            <div class="filter-container" style="display: flex;">
                 <div class="filter-group">
                     <span class="filter-label">Diet:</span>
                     <button class="filter-button" onclick="toggleFilter('diet', 'all')" id="diet-all">All</button>
@@ -956,22 +1095,31 @@
                 </div>
             </div>
             <div id="restaurant-results"></div>
-            <button class="decision-button" onclick="makeDecision('food')" style="margin-top: 1rem;">Get Food Suggestion</button>
+            <button class="decision-button" onclick="makeDecision('food')" style="margin-top: 1rem; width: 100%;">Get Food Suggestion</button>
         </div>
-        <div class="custom-decision-container" id="custom-decision-container">
-            <div class="custom-decision-header">Enter your options:</div>
-            <div class="decision-list" id="decision-list">
-                <div class="decision-item">
-                    <span class="decision-number">1</span>
-                    <input type="text" class="decision-input" placeholder="Enter first option">
-                </div>
-                <div class="decision-item">
-                    <span class="decision-number">2</span>
-                    <input type="text" class="decision-input" placeholder="Enter second option">
-                </div>
+    </div>
+
+    <div class="modal" id="custom-decision-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Custom Decision</h2>
+                <button class="close-modal" onclick="closeModal('custom-decision-modal')">×</button>
             </div>
-            <button class="add-decision" onclick="addDecisionInput()">+ Add Another Option</button>
-            <button class="custom-decision-button" onclick="handleCustomDecision()">Make Decision!</button>
+            <div class="custom-decision-container" style="display: block;">
+                <div class="custom-decision-header">Enter your options:</div>
+                <div class="decision-list" id="decision-list">
+                    <div class="decision-item">
+                        <span class="decision-number">1</span>
+                        <input type="text" class="decision-input" placeholder="Enter first option">
+                    </div>
+                    <div class="decision-item">
+                        <span class="decision-number">2</span>
+                        <input type="text" class="decision-input" placeholder="Enter second option">
+                    </div>
+                </div>
+                <button class="add-decision" onclick="addDecisionInput()">+ Add Another Option</button>
+                <button class="custom-decision-button" onclick="handleCustomDecision()">Make Decision!</button>
+            </div>
         </div>
     </div>
 
@@ -1154,28 +1302,9 @@
         function makeDecision(type) {
             const resultElement = document.getElementById("decision-result");
             const loadingElement = document.getElementById("loading");
-            const foodOptions = document.getElementById("food-options");
-            const customDecisionContainer = document.getElementById("custom-decision-container");
-            
-            // Close other menus first
-            if (type !== 'food') {
-                foodOptions.classList.remove("visible");
-                document.getElementById("filter-container").style.display = "none";
-                resetFilters();
-            }
-            
-            if (type !== 'custom') {
-                customDecisionContainer.classList.remove("visible");
-            }
             
             resultElement.classList.remove("visible");
             loadingElement.style.display = "block";
-            
-            if (type === 'custom') {
-                customDecisionContainer.classList.add("visible");
-                loadingElement.style.display = "none";
-                return;
-            }
             
             setTimeout(() => {
                 let result;
@@ -1216,7 +1345,11 @@
                 
                 loadingElement.style.display = "none";
                 resultElement.classList.add("visible");
-            }, 800);
+                
+                if (type === 'food') {
+                    closeModal('filter-modal');
+                }
+            }, 400);
         }
 
         function addDecisionInput() {
@@ -1254,12 +1387,13 @@
             
             if (options.length > 0) {
                 const randomOption = options[Math.floor(Math.random() * options.length)];
-                document.getElementById("decision-result").innerHTML = `
+                const resultElement = document.getElementById("decision-result");
+                resultElement.innerHTML = `
                     ${randomOption}
                     <div class="decision-category">Custom Decision</div>
                 `;
-                document.getElementById("decision-result").classList.add("visible");
-                document.getElementById("custom-decision-container").classList.remove("visible");
+                resultElement.classList.add("visible");
+                closeModal('custom-decision-modal');
                 
                 // Reset inputs
                 Array.from(decisionInputs).forEach(input => input.value = "");
@@ -1267,35 +1401,7 @@
         }
 
         function toggleFoodOptions() {
-            const foodOptions = document.getElementById('food-options');
-            const filterContainer = document.getElementById('filter-container');
-            const foodButton = document.querySelector('.decision-button');
-            
-            // Toggle food options visibility
-            foodOptions.classList.toggle('visible');
-            filterContainer.style.display = foodOptions.classList.contains('visible') ? 'flex' : 'none';
-            foodButton.classList.toggle('active');
-            
-            // Reset filters when hiding
-            if (!foodOptions.classList.contains('visible')) {
-                resetFilters();
-            }
-        }
-
-        function resetFilters() {
-            activeFilters = {
-                diet: 'all',
-                cuisine: 'all'
-            };
-            
-            // Reset all filter buttons
-            document.querySelectorAll('.filter-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            // Set 'All' buttons as active
-            document.getElementById('diet-all').classList.add('active');
-            document.getElementById('cuisine-all').classList.add('active');
+            // This function is kept for backward compatibility but does nothing
         }
 
         // Replace the Zomato API related code with Google Places API
@@ -1497,6 +1603,36 @@
             } else {
                 document.body.classList.remove('light-mode');
                 localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Add Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+            
+            // Reset filters when opening filter modal
+            if (modalId === 'filter-modal') {
+                resetFilters();
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('visible');
+            document.body.style.overflow = '';
+            
+            // Reset filters when closing filter modal
+            if (modalId === 'filter-modal') {
+                resetFilters();
+            }
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal(event.target.id);
             }
         });
     </script>
